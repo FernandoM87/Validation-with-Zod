@@ -1,0 +1,62 @@
+1-Vad innebär narrowing inom typescript?
+
+Inom TypeScript refererar "narrowing" till processen där TypeScript försöker minska (eller "narrow down") möjligheterna för en variabels typ inom ett visst kodblock. Detta görs genom att använda sig av olika tekniker som typkontroller och villkor för att förstå och begränsa de möjliga typerna av värden som en variabel kan ha vid en viss punkt i koden.
+
+När man skriver TypeScript-kod, används narrowing ofta för att förbättra precisionen och säkerheten i ditt program.
+
+2-Ange olika tekniker för att åstadkomma narrowing i typescript, d.v.s olika sätt att använda typeguards.
+
+Några av de vanligaste teknikerna för narrowing inkluderar:
+
+<!-- 1- Typvärdestester (typeof, instanceof, in):
+
+let x: string | number;
+
+if (typeof x === "string") {
+    // Inuti detta block vet TypeScript att x måste vara en sträng
+    console.log(x.toUpperCase());
+} else {
+    // Här vet TypeScript att x måste vara ett nummer
+    console.log(x.toFixed(2));
+} -->
+
+<!-- 2- Typvaktfunktioner:
+
+type Square = { kind: "square"; size: number };
+type Circle = { kind: "circle"; radius: number };
+type Shape = Square | Circle;
+
+function isSquare(shape: Shape): shape is Square {
+    return shape.kind === "square";
+}
+
+let myShape: Shape = /* ... */;
+
+if (isSquare(myShape)) {
+    // Här vet TypeScript att myShape är en Square
+    console.log(myShape.size);
+} else {
+    // Här vet TypeScript att myShape är en Circle
+    console.log(myShape.radius);
+} -->
+
+
+<!-- 3-Falsy/truthy värden och nollkontroller:
+
+let value: string | undefined;
+
+if (value) {
+    // Här vet TypeScript att value är en icke-falsy sträng
+    console.log(value.length);
+} else {
+    // Här vet TypeScript att value är falsy eller undefined
+} -->
+
+
+<!-- 4- Nullish coalescing operator (??):
+
+let username: string | null | undefined;
+
+const displayName = username ?? "Guest";
+// Här vet TypeScript att displayName är en sträng eftersom null och undefined är hanterade
+ -->
